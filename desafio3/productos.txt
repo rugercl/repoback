@@ -1,0 +1,20 @@
+[
+   {
+      "id":1,
+      "title":"Pantalon",
+      "price":2500,
+      "thumbnail":"http://casadeldeporte/pantalon.jpg"
+   },
+   {
+      "id":2,
+      "title":"Camiseta",
+      "price":3500,
+      "thumbnail":"http://casadeldeporte/camiseta.jpg"
+   },
+   {
+      "id":3,
+      "title":"Polera",
+      "price":2000,
+      "thumbnail":"http://casadeldeporte/polera.jpg"
+   }
+]

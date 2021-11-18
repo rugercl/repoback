@@ -1,0 +1,12 @@
+[
+    {"autor": "edgardo@mi.cl", "texto": "cristalino"},
+    {"autor": "esteban@mi.cl","texto": "mesa"},    
+    {"autor": "sandra@mi.cl","texto": "piedra"},
+    {"autor": "camila@mi.cl","texto": "sabana"},
+    {"autor": "juan@mi.cl","texto": "escritorio"},
+    {"autor": "pepe@mi.cl", "texto": "papel"},
+    {"autor": "alejandro@mi.cl","texto": "cuadreno"},
+    {"autor": "cristian@mi.cl","texto": "notebook"},
+    {"autor": "anibal@mi.cl","texto": "pantalla"},
+    {"autor": "felipe@mi.cl","texto": "television"}
+  ]

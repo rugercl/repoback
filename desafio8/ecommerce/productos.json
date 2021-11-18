@@ -1,0 +1,12 @@
+[
+    {"autor":"edgardo marquez","libro":"cristalino","precio": 600, "foto":"https://picsum.photos/200"},
+    {"autor":"esteban marquez","libro":"mesa","precio": 1500, "foto":"https://picsum.photos/200"},
+    {"autor":"sandra marquez","libro":"piedra","precio": 3590, "foto":"https://picsum.photos/200"},
+    {"autor":"camila marquez","libro":"sabana","precio": 4200, "foto":"https://picsum.photos/200"},
+    {"autor":"juan marquez","libro":"escritorio","precio": 1800, "foto":"https://picsum.photos/200"},
+    {"autor":"pepe marquez","libro":"papel","precio": 2100, "foto":"https://picsum.photos/200"},
+    {"autor":"alejandro marquez","libro":"cuadreno","precio": 3200, "foto":"https://picsum.photos/200"},
+    {"autor":"cristian marquez","libro":"notebook","precio": 4900, "foto":"https://picsum.photos/200"},
+    {"autor":"anibal marquez","libro":"pantalla","precio": 3680, "foto":"https://picsum.photos/200"},
+    {"autor":"felipe marquez","libro":"television","precio": 2523, "foto":"https://picsum.photos/200"}
+ ]

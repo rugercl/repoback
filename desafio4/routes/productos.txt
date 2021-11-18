@@ -1,0 +1,20 @@
+[
+    {
+       "id":1,
+       "nombre":"Casa de los Espiritus",
+       "precio":23000,
+       "autor":"Isabel Allende"
+    },
+    {
+       "id":2,
+       "nombre":"El Codigo Da Vinci",
+       "precio":15000,
+       "autor":"Dan Brown"
+    },
+    {
+       "id":3,
+       "nombre":"It",
+       "precio":20000,
+       "autor":"Stephen King"
+    }
+ ]

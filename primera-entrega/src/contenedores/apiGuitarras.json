@@ -1,0 +1,72 @@
+[
+    {
+       "nombre":"Palmer",
+       "decripcion":"Guitarra acústica con cuerdas de nylon",
+       "foto":"https://drive.google.com/file/d/176EZBm_HMw_rFqlk9DXqSq4_6drK1OaC/view?usp=sharing ",
+       "precio":"139900",
+       "stock":"5"
+    },
+    {
+       "nombre":"Vizcaya",
+       "decripcion":"Guitarra clásica Vizcaya ARCG44",
+       "foto":"https://drive.google.com/file/d/1AjLMyeEc9PDMib_SSmYdKmvkry8paXoN/view?usp=sharing",
+       "precio":"48990",
+       "stock":"2"
+    },
+    {
+       "nombre":"Raimundo",
+       "decripcion":"Guitarra acústica Raimundo 104B - cuerdas Acero",
+       "foto":"https://drive.google.com/file/d/1DrRiRTIMX0NYZzNDPniIvPf-5QAlcHVX/view?usp=sharing",
+       "precio":"409900",
+       "stock":"3"
+    },
+    {
+       "nombre":"Palmer",
+       "decripcion":"Guitarra acústica de nylon Palmer Nubi",
+       "foto":"https://drive.google.com/file/d/1FfQeI74huTeeZpIdwNbCSAt3w-RhTzwg/view?usp=sharing ",
+       "precio":"139900",
+       "stock":"1"
+    },
+    {
+       "nombre":"Palmer",
+       "decripcion":"Guitarra acústica con cuerdas de nylon Palmer Karissa VP",
+       "foto":"https://drive.google.com/file/d/1Jt_VMTJJsD_OTevlBa42Ti1iKKN0C_VV/view?usp=sharing ",
+       "precio":"129000",
+       "stock":"6"
+    },
+    {
+       "nombre":"Vizcaya",
+       "decripcion":"Guitarra clásica Vizcaya ARCG39 color blue burst (UB)",
+       "foto":"https://drive.google.com/file/d/1M9MIdXsMejwHJvYmD86ILd3q93yFO2fo/view?usp=sharing",
+       "precio":"60990",
+       "stock":"4"
+    },
+    {
+       "nombre":"Ibanez",
+       "decripcion":"Guitarra acústica Ibanez PF15 color natural (NT)",
+       "foto":"https://drive.google.com/file/d/1RPZt0R4Ie1MGgjnpcmKjb214JKZzlurg/view?usp=sharing",
+       "precio":"154900",
+       "stock":"8"
+    },
+    {
+       "nombre":"Ibanez",
+       "decripcion":"Pack guitarra acústica Ibanez Jampack V50NJP color natural",
+       "foto":"https://drive.google.com/file/d/1au1YboOE2KPIWDjG0sJYFxL96vWX_5h7/view?usp=sharing",
+       "precio":"139900",
+       "stock":"2"
+    },
+    {
+       "nombre":"Ibanez",
+       "decripcion":"Pack Guitarra Acústica Ibanez VC50NJP NT",
+       "foto":"https://drive.google.com/file/d/1lZi-Mt4Af5lJaQH2hzKx8OhCgIGYiGX9/view?usp=sharing",
+       "precio":"114900",
+       "stock":"4"
+    },
+    {
+       "nombre":"Raimundo",
+       "decripcion":"Guitarra acústica Raimundo Tatyana Ryzhkova Signature Tapa de Cedro",
+       "foto":"https://drive.google.com/file/d/1usv01zAJHlGvA7jNAmM2X7k_lF7Zx2EO/view?usp=sharing",
+       "precio":"1049900",
+       "stock":"9"
+    }
+ ]
