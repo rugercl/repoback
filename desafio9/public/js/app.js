@@ -1,18 +1,6 @@
 const socket = io.connect();
 
-// //Agregar libros al array
-// const agregaUsuario = document.getElementById('agregaUsuario')
-// agregaLibro.addEventListener('submit', e => {
-//     e.preventDefault()
-//     const producto = {
-//         libro: agregaUsuario[0].value,
-//         precio: agregaUsuario[1].value,
-//         foto: agregaUsuario[2].value
-//     }
-// })
-
 socket.on('productos', productos => {
-    //console.log(productos)
     
     makeHtmlTable(productos).then(html => {
         document.getElementById('productos').innerHTML = html

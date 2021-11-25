@@ -1,5 +1,6 @@
 const express = require('express')
 const faker = require('faker');
+const handlebars = require ('express-handlebars');
 
 const { Server: HttpServer } = require('http')
 const { Server: Socket } = require('socket.io')
@@ -11,7 +12,6 @@ const app = express();
 const httpServer = new HttpServer(app)
 const io = new Socket(httpServer)
 
-const datosLibros = new Contenedor();
 const datosMensajes = new ContenedorMensajes('mensajes.json');
 
 let productos = [];
@@ -24,15 +24,19 @@ for(let i = 0; i <= 4; i++){
     });
 }
 
+//llamado a Handlebars
+app.engine(
+    "hbs",
+    handlebars({
+        extname: ".hbs",
+        defaultLayout: 'index.hbs',
+    })
+);
+app.set("view engine", "hbs");
+app.set("views", "./views");
+
 
 io.on('connection', async socket=>{
-    //carga datos
-    socket.emit('productos', productos);
-   
-    socket.on('update', producto =>{       
-        io.sockets.emit('productos', productos)
-    })
-
     //Carga de mensajes
     socket.emit('mensajes', await datosMensajes.listarAll())
 
@@ -48,9 +52,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 
-app.get('/api/productos-test', (req, res) => {
-    
-})
+
+app.get('/api/productos-test', (req, res)=>{
+    let produc = productos;
+
+    res.render("vista",{
+        productos: produc,
+        hayProductos: produc.length
+    });
+});
 
 
 httpServer.listen("8080", ()=>{
