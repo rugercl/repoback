@@ -1,6 +1,9 @@
 const express = require('express')
 const faker = require('faker');
 const handlebars = require ('express-handlebars');
+const config = require('./config');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const { Server: HttpServer } = require('http')
 const { Server: Socket } = require('socket.io')
@@ -35,6 +38,18 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", "./views");
 
+app.use(session({
+    // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
+    store: MongoStore.create({ mongoUrl: config.mongoRemote.cnxStr }),
+    secret: 'shhhhhhhhhhhhhhhhhhhhh',
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+        maxAge: 60000
+    }
+}))
+
 
 io.on('connection', async socket=>{
     //Carga de mensajes
@@ -63,6 +78,7 @@ app.get('/api/productos-test', (req, res)=>{
 });
 
 
-httpServer.listen("8080", ()=>{
-    console.log("Server on port 8080")
+const connectedServer = httpServer.listen(config.PORT, () => {
+    console.log(`Server on port ${connectedServer.address().port}`)
 })
+connectedServer.on('error', error => console.log(`Error en servidor ${error}`))

@@ -35,60 +35,40 @@
     <div class="container mt-5 p-5">
         <div id="contenido" class="row">
             <div class="col-md-6">
-                <form id="agregaUsuario">
-                    <legend class="mb-4">Centro de Mensajes</legend>
-                    <div class="form-group row">
-                        <label for="email" class="col-sm-4 col-lg-4 col-form-label">Ingrese su email:</label>
-                        <div class="col-sm-8 col-lg-8">
-                            <input id="email" type="text" name="email" class="form-control" placeholder="Ej. xx@xx.com">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="nombre" class="col-sm-4 col-lg-4 col-form-label">Ingrese su Nombre:</label>
-                        <div class="col-sm-8 col-lg-8">
-                            <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Ej. Alejandro">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="apellido" class="col-sm-4 col-lg-4 col-form-label">Ingrese su Apellido:</label>
-                        <div class="col-sm-8 col-lg-8">
-                            <input id="apellido" type="text" name="apellido" class="form-control" placeholder="Ej. Ramirez">
-                        </div>
-                    </div>                    
-                    <div class="form-group row">
-                        <label for="edad" class="col-sm-4 col-lg-4 col-form-label">Ingrese su edad:</label>
-                        <div class="col-sm-8 col-lg-8">
-                            <input type="number" id="edad" name="edad" class="form-control"  placeholder="Ej. 32">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="alias" class="col-sm-4 col-lg-4 col-form-label">Ingrese su Alias:</label>
-                        <div class="col-sm-8 col-lg-8">
-                            <input type="text" id="alias" name="alias" class="form-control"  placeholder="Ej. Capitan">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="foto" class="col-sm-4 col-lg-4 col-form-label">Foto URL Avatar:</label>
-                        <div class="col-sm-8 col-lg-8">
-                            <input type="url" id="foto" name="foto" class="form-control"  placeholder="Ej. https://picsum.photos/">
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-top:1rem;">  
-                        <button class="btn btn-primary mt-3">Enviar</button>
+                <h1>Centro de Mensajes (Compresión: <span id="compresion-info"></span>%)</h1>
+                <br>
+                <input type="text" id="username" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu email">
+                <input type="text" id="firstname" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu nombre">
+                <input type="text" id="lastname" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu apellido">
+                <input type="text" id="age" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu edad">
+                <input type="text" id="alias" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu alias">
+                <input type="text" id="avatar" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu avatar (url)">
+                <!-- <input type="text" id="inputUsername" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu email"> -->
+                <hr>
+    
+                <div id="mensajes"></div>
+    
+                <form id="formPublicarMensaje" class="form-inline" autocomplete="off">
+                    <div class="form-group">
+                        <input disabled id="inputMensaje" type="text" class="form-control my-2 mr-2"
+                            placeholder="Ingresá un mensaje...">
+                        <button disabled id="btnEnviar" type="submit" class="btn btn-primary my-2">Enviar!</button>
                     </div>
                 </form>
             </div>
             <div class="col-md-6">
                 <div><img src="https://picsum.photos/300/300" alt=""></div>
+                <!-- <div class="form-group" style="margin-top:1rem;">  
+                    <button class="btn btn-primary mt-3">Registrar Mensaje</button>
+                </div> -->
             </div>
 
         </div>
-        <div class="container mt-5 p-5">
+        <!-- <div class="container mt-5 p-5">
             <legend class="mb-4">Centro de Mensajes</legend>
-            <!-- <br>
+            <br>
             <input type="text" id="inputUsername" class="form-control w-50 my-2 mr-2" placeholder="Ingresá tu email">
-            <hr> -->
+            <hr>
 
             <div id="mensajes"></div>
 
@@ -99,7 +79,7 @@
                     <button disabled id="btnEnviar" type="submit" class="btn btn-primary my-2">Enviar!</button>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
 
     

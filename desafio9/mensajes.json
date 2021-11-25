@@ -1,8 +1,15 @@
 [
   {
-    "autor": "epalacios@mi.cl",
-    "texto": "hola",
-    "fecha": "28/10/2021 09:19:13",
+    "autor": {
+      "email": "rugercl@gmail.com",
+      "nombre": "Edgardo",
+      "apellido": "Palacios",
+      "edad": "55",
+      "alias": "cap",
+      "avatar": "https://picsum.photos/300/300"
+    },
+    "texto": "test1",
+    "fecha": "25/11/2021 09:16:22",
     "id": 1
   }
 ]
