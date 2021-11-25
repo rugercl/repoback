@@ -1,4 +1,5 @@
-const { promises: fs } = require('fs')
+// const { promises: fs } = require('fs')
+import fs from 'fs';
 
 class ContenedorMensajes{
     constructor(ruta) {
@@ -53,7 +54,7 @@ class ContenedorMensajes{
 }
 
 
-module.exports = ContenedorMensajes;
+export default ContenedorMensajes;
 
 
 

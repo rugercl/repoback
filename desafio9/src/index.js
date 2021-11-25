@@ -1,15 +1,18 @@
-const express = require('express')
-const faker = require('faker');
-const handlebars = require ('express-handlebars');
-const config = require('./config');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+import express from 'express'
+import faker from 'faker'
+import handlebars from 'express-handlebars'
+import config from './config.js'
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
+import { normalizarMensajes } from '../src/normalizacion/index.js'
+// const normalizarMensajes = require('../src/normalizacion/mensajes');
 
-const { Server: HttpServer } = require('http')
-const { Server: Socket } = require('socket.io')
+import { Server as HttpServer } from 'http'
+import { Server as Socket } from 'socket.io'
 
-const Contenedor = require('../api/contenedor')
-const ContenedorMensajes = require('../api/contenedorMensajes')
+// const Contenedor = require('../api/contenedor')
+//const ContenedorMensajes = require('../api/contenedorMensajes')
+import ContenedorMensajes from '../api/contenedorMensajes.js'
 
 const app = express();
 const httpServer = new HttpServer(app)
@@ -53,12 +56,12 @@ app.use(session({
 
 io.on('connection', async socket=>{
     //Carga de mensajes
-    socket.emit('mensajes', await datosMensajes.listarAll())
+    socket.emit('mensajes', normalizarMensajes(await datosMensajes.listarAll()))
 
     socket.on('nuevoChat', async mensaje => {
         mensaje.fecha = new Date().toLocaleString()
         await datosMensajes.guardar(mensaje)
-        io.sockets.emit('mensajes', await datosMensajes.listarAll());
+        io.sockets.emit('mensajes', normalizarMensajes(await datosMensajes.listarAll()));
     })
 
 })

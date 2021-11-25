@@ -19,6 +19,12 @@ function makeHtmlTable(productos) {
         })
 }
 
+
+//normalizacion de mensajes
+const schemaAuthor = new normalizr.schema.Entity('author', {}, { idAttribute: 'id' });
+const schemaMensaje = new normalizr.schema.Entity('post', { author: schemaAuthor }, { idAttribute: '_id' })
+const schemaMensajes = new normalizr.schema.Entity('posts', { mensajes: [schemaMensaje] }, { idAttribute: 'id' })
+
 //Agregar mensajes al Array
 const username = document.getElementById('username')
 const inputMensaje = document.getElementById('inputMensaje')
@@ -45,9 +51,22 @@ formPublicarMensaje.addEventListener('submit', e => {
     inputMensaje.focus()
 })
 
-socket.on('mensajes', mensajes => {
-    console.log(mensajes);
-    const html = makeHtmlList(mensajes)
+socket.on('mensajes', mensajesN => {
+
+    const mensajesNsize = JSON.stringify(mensajesN).length
+    console.log(mensajesN, mensajesNsize);
+
+    const mensajesD = normalizr.denormalize(mensajesN.result, schemaMensajes, mensajesN.entities)
+
+    const mensajesDsize = JSON.stringify(mensajesD).length
+    console.log(mensajesD, mensajesDsize);
+
+    const porcentajeC = parseInt((mensajesNsize * 100) / mensajesDsize)
+    console.log(`Porcentaje de compresión ${porcentajeC}%`)
+    document.getElementById('compresion-info').innerText = porcentajeC
+
+    console.log(mensajesD);
+    const html = makeHtmlList(mensajesD.mensajes)
     document.getElementById('mensajes').innerHTML = html;
 })
 

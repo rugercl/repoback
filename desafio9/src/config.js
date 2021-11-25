@@ -1,4 +1,4 @@
-const config= {
+export default {
     PORT: process.env.PORT || 8080,
     mongoRemote: {
         client: 'mongodb',
@@ -9,4 +9,3 @@ const config= {
     }
 
 }
-module.exports= config;
