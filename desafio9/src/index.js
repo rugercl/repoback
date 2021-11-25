@@ -5,13 +5,10 @@ import config from './config.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import { normalizarMensajes } from '../src/normalizacion/index.js'
-// const normalizarMensajes = require('../src/normalizacion/mensajes');
 
 import { Server as HttpServer } from 'http'
 import { Server as Socket } from 'socket.io'
 
-// const Contenedor = require('../api/contenedor')
-//const ContenedorMensajes = require('../api/contenedorMensajes')
 import ContenedorMensajes from '../api/contenedorMensajes.js'
 
 const app = express();
@@ -42,7 +39,6 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 
 app.use(session({
-    // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
     store: MongoStore.create({ mongoUrl: config.mongoRemote.cnxStr }),
     secret: 'shhhhhhhhhhhhhhhhhhhhh',
     resave: false,

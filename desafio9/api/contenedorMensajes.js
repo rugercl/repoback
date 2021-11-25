@@ -1,31 +1,32 @@
 // const { promises: fs } = require('fs')
-import fs from 'fs';
+// import fs from 'fs';
+import { promises as fs } from 'fs'
 
 class ContenedorMensajes{
     constructor(ruta) {
         this.ruta = ruta;
     }
-
-    async guardar(obj) {
-        const objs = await this.listarAll()
+    async guardar(elem) {
+        const elems = await this.listarAll()
 
         let newId
-        if (objs.length == 0) {
+        if (elems.length == 0) {
             newId = 1
         } else {
-            newId = objs[objs.length - 1].id + 1
+            newId = elems[elems.length - 1].id + 1
         }
 
-        const newObj = { ...obj, id: newId }
-        objs.push(newObj)
+        const newElem = { ...elem, id: newId }
+        elems.push(newElem)
 
         try {
-            await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2))
+            await fs.writeFile(this.ruta, JSON.stringify(elems, null, 2))
             return newId
         } catch (error) {
             throw new Error(`Error al guardar: ${error}`)
         }
-    } 
+    }
+
 
     getById(id){
     return this.archivo[id];
