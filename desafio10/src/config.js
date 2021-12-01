@@ -1,5 +1,6 @@
 export default {
-    PORT: process.env.PORT || 8080,
+    PORT: process.env.PORT || 3000,
+
     mongoRemote: {
         client: 'mongodb',
         cnxStr: 'mongodb://localhost/ecommerce',
@@ -7,5 +8,4 @@ export default {
     fileSystem: {
         path: './DB'
     }
-
 }
