@@ -24,11 +24,15 @@ app.set('view engine', 'ejs');
 //session MongoDB
 const advancedOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 app.use(session({
-    // store: MongoStore.create({ mongoUrl: config.mongoLocal.cnxStr }),
+    // store: MongoStore.create({ mongoUrl: config.mongoRemote.cnxStr }),
     store: MongoStore.create({ 
         mongoUrl    : 
-        "mongodb+srv://edgardo:Ge10&20ru@clustercoderhouse.pqwe2.mongodb.net/desafio10?retryWrites=true&w=majority",
+        "mongodb+srv://edgardo:1q2w3e4r@cluster0.my327.mongodb.net/coderLogin?retryWrites=true&w=majority",
         mongoOptions: advancedOptions }),
+        // store: MongoStore.create({ 
+        // mongoUrl    : 
+        // "mongodb+srv://clustercoderhouse.pqwe2.mongodb.net/ClusterCoderHouse --username edgardo",
+        // mongoOptions: advancedOptions }),
     secret: ' misecreto',
     resave: false,
     saveUninitialized: false,
