@@ -29,16 +29,12 @@ app.use(session({
         mongoUrl    : 
         "mongodb+srv://edgardo:1q2w3e4r@cluster0.my327.mongodb.net/coderLogin?retryWrites=true&w=majority",
         mongoOptions: advancedOptions }),
-        // store: MongoStore.create({ 
-        // mongoUrl    : 
-        // "mongodb+srv://clustercoderhouse.pqwe2.mongodb.net/ClusterCoderHouse --username edgardo",
-        // mongoOptions: advancedOptions }),
-    secret: ' misecreto',
+    secret: 'misecreto',
     resave: false,
     saveUninitialized: false,
     rolling: true,
     cookie: {
-        maxAge: 60000
+        maxAge: 600000
     }
 }))
 
