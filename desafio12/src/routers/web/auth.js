@@ -40,13 +40,6 @@ authWebRouter.post('/login', (req, res) => {
     res.redirect('/home')
 })
 
-authWebRouter.post('/registro', (req, res) => {
-    req.session.email = req.body.email
-    req.session.pass = req.body.pass
-    console.log(req.session)
-    res.redirect('/login')
-})
-
 
 
 export default authWebRouter
