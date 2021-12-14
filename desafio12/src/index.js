@@ -37,15 +37,15 @@ app.use(session({
   }
 }))
 
-let dataInfo={
-  argumentos: process.argv,
+let dataInfo=[{
+  argumentos: process.argv[0],
   nombre: process.platform,
   version: process.version,
   memoria: process.memoryUsage().rss,
   path: process.execPath,
   process: process.pid,
   carpeta: process.cwd(),
-}
+}]
 
 //passport
 app.use(passport.initialize());
@@ -128,7 +128,16 @@ app.get('/login',(req,res)=>{
 
 app.get('/info', auth, (req,res)=>{
   let data=dataInfo;
-  res.json(data);
+  console.log(data);
+  res.render('info',{
+    informacion: data,
+    hayInfo: data.length
+  });
+});
+
+app.get('/api/randoms', auth, (req,res)=>{
+  // let data=dataInfo;
+  // res.json(data);
 });
 
 app.get('/signup',(req,res)=>{

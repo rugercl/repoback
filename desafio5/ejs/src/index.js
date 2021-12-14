@@ -26,6 +26,7 @@ app.post('/productos', (req, res)=>{
 
 app.get('/productos', (req, res)=>{
     let produc = datos.getAll()
+    console.log(produc)
 
     res.render("vista",{
         productos: produc,
