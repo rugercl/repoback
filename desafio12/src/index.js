@@ -55,13 +55,13 @@ app.use(passport.session());
 passport.use('local-login', new LocalStrategy((username, password, done) => {
   //validacion base de datos
   let user = data.find(user => user.username === username);
-
   if (user) {
     return done(null, user);
   }
   if (!isValidPassword(user, password)) {
     console.log('Invalid Password');
     return done(null, false);
+    
   }
   return done(null, false, { message: 'Incorrect username.' });
 }));
@@ -114,8 +114,8 @@ function createHash(password) {
 //rutas
 app.get('/home', auth, (req, res) => {
   // res.send("Hola, " + req.user.username + " Bienvenido a la pagina de inicio");
-  // console.log(req.session);
-  res.render('home');
+  console.log(req.user.username);
+  res.render('home', {user: req.user.username});
 })
 
 app.get('/',(req,res)=>{

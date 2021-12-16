@@ -102,8 +102,8 @@ function createHash(password) {
 //rutas
 app.get('/home', auth, (req, res) => {
   // res.send("Hola, " + req.user.username + " Bienvenido a la pagina de inicio");
-  // console.log(req.session);
-  res.render('home');
+  console.log(req.user.username);
+  res.render('home', { user: req.user.username });
 })
 
 app.get('/',(req,res)=>{
