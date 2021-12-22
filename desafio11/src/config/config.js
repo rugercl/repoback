@@ -1,7 +1,7 @@
 const config = {
     mongoRemote: {
         client: 'mongodb',
-        cnxStr: 'mongodb://localhost/usuarios',
+        cnxStr: 'mongodb://localhost/users',
     }
 }
 module.exports = config;
