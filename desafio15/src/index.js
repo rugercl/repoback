@@ -12,6 +12,7 @@ const numCPUs = require('os').cpus().length;
 dotenv.config();
 
 const data = require('./data/index.js');
+const PORT = process.env.PORT || 3000;
 
 
 //plantilla ejs
@@ -173,6 +174,6 @@ if (cluster.isMaster) {
 }
 
 
-app.listen(3000, () => {
-  console.log('Server on port 3000');
+app.listen(PORT, () => {
+  console.log('Server on port PORT');
 });
