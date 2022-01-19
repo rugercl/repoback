@@ -7,6 +7,7 @@ const datos = new Contenedor(productos);
 
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -34,6 +35,6 @@ app.get('/productos', (req, res)=>{
     });
 });
 
-app.listen("8080", ()=>{
+app.listen(PORT, ()=>{
     console.log("Server on port 8080");
 })
