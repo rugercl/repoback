@@ -1,28 +1,33 @@
 let productosDao
 let carritosDao
+let usuariosDao
 
-switch (process.env.PERS) {
-    case 'firebase':
-        const { default: ProductosDaoFirebase } = await import('./productos/ProductosDaoFirebase.js')
-        const { default: CarritosDaoFirebase } = await import('./carritos/CarritosDaoFirebase.js')
+let url = 'mongodb'
 
-        productosDao = new ProductosDaoFirebase()
-        carritosDao = new CarritosDaoFirebase()
-        break
+switch (url) {
     case 'mongodb':
-        const { default: ProductosDaoMongoDb } = await import('./productos/ProductosDaoMongoDb.js')
-        const { default: CarritosDaoMongoDb } = await import('./carritos/CarritosDaoMongoDb.js')
+        const ProductosDao = require('../daos/Productos/productos.daos')
+        const CarritosDao = require('../daos/Carritos/carritos.daos')
+        const UsuariosDao = require('../daos/Usuarios/usuarios.daos')
 
-        productosDao = new ProductosDaoMongoDb()
-        carritosDao = new CarritosDaoMongoDb()
+        productosDao = new ProductosDao()
+        carritosDao = new CarritosDao()
+        usuariosDao = new UsuariosDao()
+
+        break;
+    case 'firebase':
+
+        const UsuariosDaoFirebase = require('../daos/Usuarios/usuarios.daos.firebase')
+        const CarritosDaoFirebase = require('../daos/Carritos/carritos.dao.firebase')
+        const ProductosDaoFirebase = require('../daos/Productos/productos.dao.firebase')
+
+        usuariosDao = new UsuariosDaoFirebase()
+        carritosDao = new CarritosDaoFirebase()
+        productosDao = new ProductosDaoFirebase()
+
         break
     default:
-        const { default: ProductosDaoMem } = await import('./productos/ProductosDaoMem.js')
-        const { default: CarritosDaoMem } = await import('./carritos/CarritosDaoMem.js')
-
-        productosDao = new ProductosDaoMem()
-        carritosDao = new CarritosDaoMem()
-        break
+        break;
 }
 
-export { productosDao, carritosDao }
+module.exports = { productosDao, carritosDao, usuariosDao }

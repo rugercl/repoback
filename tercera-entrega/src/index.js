@@ -1,12 +1,18 @@
-import app from './server.js'
-import express from 'express'
+require('dotenv').config()
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const morgan = require('morgan')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static('public'))
+app.use(cors())
+app.use(morgan('dev'))
 
-const PORT = 8080
-const server = app.listen(PORT, () => {
-    console.log(`Server on port ${server.address().port}`)
+
+const routerRoutes = require('./routes')
+app.use('/api/v1', routerRoutes)
+
+app.listen(3000, () => {
+    console.log('Server on port 3000');
 })
-server.on('error', error => console.log(`Error en servidor ${error}`))
