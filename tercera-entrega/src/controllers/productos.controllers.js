@@ -32,6 +32,7 @@ exports.GetOneProduct = async (req, res) => {
 exports.CreateOneProduct = async (req, res) => {
 
     try {
+        console.log('req.body', req.body);
 
         const {nombre, descripcion, foto, precio, stock, codigo} = req.body
 
@@ -47,6 +48,7 @@ exports.CreateOneProduct = async (req, res) => {
 
         const newProducts = await productosDao.newProduct(newObjProd)
         res.json({ newProducts })
+        // res.redirect('/')
 
     } catch (error) {
         console.log('error', error);
