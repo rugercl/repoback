@@ -10,7 +10,7 @@ module.exports = (role) => async (req, res, next) => {
         const verificar = jwt.verify(token, process.env.JWT_SECRET);
         const userLogin = await usuariosDao.authTokenVerify({ verificar, token });
         if (!userLogin) {
-            return res.status(401).json({ mensaje: 'Dentro: No Autorizado' })
+            return res.status(401).json({ mensaje: 'Login: No Autorizado' })
         }
 
         res.locals.user = userLogin;
@@ -21,6 +21,6 @@ module.exports = (role) => async (req, res, next) => {
 
     catch (error) {
         console.log('error', error);
-        return res.status(401).json({ mensaje: 'Deslogueado: Acceso Restringido', error: error.message })
+        return res.status(401).json({ mensaje: 'Logout: Acceso Restringido', error: error.message })
     }
 }

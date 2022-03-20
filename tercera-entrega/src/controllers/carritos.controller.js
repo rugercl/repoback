@@ -1,4 +1,11 @@
+const twlio = require('twilio')
 const { carritosDao, productosDao, usuariosDao } = require('../daos/index')
+const { sendNodeMailCart } = require('../middleware/nodeMailerCart')
+const logger = require('../utils/logger')
+
+const acountID = process.env.TWILIO_ACOUNT_ID
+const authToken = process.env.TWILIO_AUTH_TOKEN
+const client = twlio(acountID, authToken)
 
 exports.GetAllCarts = async (req, res) => {
 
@@ -8,7 +15,7 @@ exports.GetAllCarts = async (req, res) => {
         res.json({ cartsAll })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos GetAllCarts ', error)
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -126,18 +133,30 @@ exports.payCart = async (req, res) => {
         const oneUser = await usuariosDao.findOneId(idUser)
         const { nombre, usuario, telefono } = oneUser
 
-        function primeraLetraDelNombreMayuscula(name) {
+        function nameUser(name) {
             return name.charAt(0).toUpperCase() + name.slice(1);
         }
 
-        const mailContent = {
+        const contentEmail = {
             subject: 'Nuevo Pedido',
             nombre,
             usuario,
             pedidoFront
         }
 
-        await sendNodeMailCart(mailContent)
+        const msgClient = await client.messages.create({
+            body: 'Tu pedido ya fue recibo y se encuentra en proceso de envio',
+            from: process.env.TWILIO_NUMBER_DEFAULT,
+            to: telefono
+        })
+
+        const msgAdmin = await client.messages.create({
+            body: `Nuevo Pedido de ${nameUser(nombre)}. Email del usuario: ${usuario}`,
+            from: process.env.TWILIO_NUMBER_DEFAULT_ADMIN,
+            to: process.env.TWILIO_NUMBER_DEFAULT_WHTS
+        })
+
+        await sendNodeMailCart(contentEmail)
 
         res.json(msgClient)
 

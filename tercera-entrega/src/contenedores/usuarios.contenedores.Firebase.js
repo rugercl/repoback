@@ -3,6 +3,9 @@ const { v4: uuid4 } = require('uuid')
 const config = require('../config/ecommerce-d064c-firebase-adminsdk-v2owy-a323d5460a.json')
 
 
+// Create a reference to the cities collection
+// const { collection, query, where } = require('@firebase/firestore');
+
 admin.initializeApp({
     credential: admin.credential.cert(config),
     databaseURL: "http://ecommerce.firebaseio.com"

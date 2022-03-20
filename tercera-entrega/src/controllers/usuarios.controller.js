@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken')
 const moment = require('moment')
 const toDay = new Date()
 const { usuariosDao, carritosDao } = require('../daos/index')
-const { validationResult } = require('express-validator')
+const sendNodeMail = require('../middleware/nodemailer')
+const sendNodeMailAdmin = require('../middleware/nodemailerAdmin')
 const cloudinary = require("../utils/cloudinary");
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
@@ -55,24 +56,25 @@ passport.use('local-register', new LocalStrategy({
         newUser.token = [token]
         await usuariosDao.ModifyUserToken(newUser)
 
-        function primeraLetraDelNombreMayuscula(name) {
+        function nameUser(name) {
             return name.charAt(0).toUpperCase() + name.slice(1);
         }
 
-        const mailContent = {
+        const contentEmail = {
             email: usuario,
             subject: 'Registro exitoso ',
-            msg: '¡Hola ' + primeraLetraDelNombreMayuscula(nombre) + ' Bienvenido!',
+            msg: '¡Hola ' + nameUser(nombre) + ' Bienvenido!',
         }
 
-        await sendNodeMail(mailContent.email, mailContent.subject, mailContent.msg)
+        await sendNodeMail(contentEmail.email, contentEmail.subject, contentEmail.msg)
+
 
     } catch (error) {
         console.log('error1', error);
     }
 }))
 
-//PassPort
+//Login PassPort
 passport.use('local-login', new LocalStrategy(async (usuario, contrasenia, done) => {
 
     try {
@@ -111,7 +113,7 @@ exports.ImageUpload = async (req, res) => {
         const oneUser = await usuariosDao.findOneId(id)
         const { carritoID, nombre, edad, usuario, direccion, telefono, admin, foto } = oneUser
 
-        const mailContent = {
+        const contentEmail = {
             subject: 'Nuevo Registro',
             carritoID,
             nombre,
@@ -123,7 +125,7 @@ exports.ImageUpload = async (req, res) => {
             foto
         }
 
-        await sendNodeMailAdmin(mailContent)
+        await sendNodeMailAdmin(contentEmail)
         res.send(results.secure_url);
 
     } catch (error) {
@@ -207,13 +209,13 @@ exports.DeleteOneUSer = async (req, res) => {
             cartSearch = await carritosDao.DeleteOneCart(idCart)
             const deleteUser = await usuariosDao.DeleteOneUser(id)
 
-            res.json('eliminado')
+            res.json('Carrito eliminado')
         } else {
 
             cartSearch = await carritosDao.DeleteOneCart(idCart)
             const deleteUser = await usuariosDao.DeleteOneUser(id)
 
-            res.json('eliminado')
+            res.json('Carrito eliminado')
         }
 
     } catch (error) {

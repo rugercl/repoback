@@ -1,6 +1,6 @@
-const { productosDao } = require('../daos/index')
 const moment = require('moment')
 const toDay = moment().format('DD/MM/YYYY')
+const {productosDao} = require('../daos/index')
 
 exports.GetAllProducts = async (req, res) => {
  
@@ -32,7 +32,6 @@ exports.GetOneProduct = async (req, res) => {
 exports.CreateOneProduct = async (req, res) => {
 
     try {
-        console.log('req.body', req.body);
 
         const {nombre, descripcion, foto, precio, stock, codigo} = req.body
 
@@ -48,7 +47,6 @@ exports.CreateOneProduct = async (req, res) => {
 
         const newProducts = await productosDao.newProduct(newObjProd)
         res.json({ newProducts })
-        // res.redirect('/')
 
     } catch (error) {
         console.log('error', error);

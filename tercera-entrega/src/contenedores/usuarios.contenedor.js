@@ -15,7 +15,7 @@ app.use(session({
         mongoUrl: process.env.MONGO_DB,
         mongoOptions: opcionesMongoose
     }),
-    secret: 'entregable3',
+    secret: 'DecimotercerEntregableCoderHouse2021',
     resave: false,
     saveUninitialized: false,
     rolling: true,

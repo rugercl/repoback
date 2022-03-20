@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const controllersCarts = require('../controllers/carritos.controllers')
+const controllersCarts = require('../controllers/carritos.controller')
 const { GetAllCarts, GetOneCart, newCart, ModifyOneCart, DeleteOneProductCart, DeleteOneCartAndProducts, 
     addProductinTheCart, payCart } = controllersCarts
 
@@ -16,7 +16,6 @@ router.put('/:id', ModifyOneCart)
 
 router.delete('/:id', DeleteOneCartAndProducts)
 router.delete('/:id/productos/:idProd', DeleteOneProductCart)
-/* ------------------------------ */
 
 
 

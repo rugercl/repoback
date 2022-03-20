@@ -1,5 +1,5 @@
 const ContenedorUsuariosMongoAtlas = require('../../contenedores/usuarios.contenedor')
-const SchemaUsers = require('../../models/usuarios.models')
+const SchemaUsers = require('../../model/usuarios.model')
 
 class UsuariosDAOMongoDB extends ContenedorUsuariosMongoAtlas {
     constructor() {

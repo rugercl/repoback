@@ -1,6 +1,7 @@
 const twlio = require('twilio')
 const { carritosDao, productosDao, usuariosDao } = require('../daos/index')
 const { sendNodeMailCart } = require('../middleware/nodeMailerCart')
+const logger = require('../utils/logger')
 
 const acountID = process.env.TWILIO_ACOUNT_ID
 const authToken = process.env.TWILIO_AUTH_TOKEN
@@ -14,7 +15,7 @@ exports.GetAllCarts = async (req, res) => {
         res.json({ cartsAll })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos GetAllCarts ', error)
         res.status(500).json({ msg: 'Error', error })
     }
 }

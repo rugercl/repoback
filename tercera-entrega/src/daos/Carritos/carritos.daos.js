@@ -1,5 +1,5 @@
 const ContenedorCarritosMongoAtlas = require('../../contenedores/carrito.contenedor')
-const SchemaCats = require('../../models/carritos.models')
+const SchemaCats = require('../../model/carritos.model')
 
 class CarritosDAOMongoDB extends ContenedorCarritosMongoAtlas {
     constructor() {
