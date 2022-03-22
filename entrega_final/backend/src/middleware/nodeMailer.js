@@ -15,5 +15,6 @@ const sendNodeMail = (email, subject, msg)=>{
         subject: subject,
     html:`<h1 style='text-align: center'>${msg}</h1>`
 };
+return transporter.sendMail(mailOptions);
 }
 module.exports = sendNodeMail;

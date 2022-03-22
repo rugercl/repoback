@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const logger = require('../../src/utils/logger')
 
 const mongoose = require('mongoose')
 require('../config/db.mongo')
@@ -15,7 +16,7 @@ app.use(session({
         mongoUrl: process.env.MONGO_DB,
         mongoOptions: opcionesMongoose
     }),
-    secret: 'DecimotercerEntregableCoderHouse2021',
+    secret: 'misecreto',
     resave: false,
     saveUninitialized: false,
     rolling: true,
@@ -39,7 +40,7 @@ class ContenedorUsersMongoAtlas {
             return userAll
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas findAll ', error);
         }
     }
 
@@ -50,7 +51,7 @@ class ContenedorUsersMongoAtlas {
             return oneUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas findOneId', error);
         }
     }
 
@@ -59,16 +60,16 @@ class ContenedorUsersMongoAtlas {
 
             let { usuario } = user
             const oneUser = await this.userModel.findOne({ usuario })
-            console.log('oneUser', oneUser)
 
             return oneUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas findOneUser', error);
         }
     }
 
     async newUser(body) {
+        console.log(body)
         try {
 
             const newUser = new this.userModel(body);
@@ -76,7 +77,7 @@ class ContenedorUsersMongoAtlas {
             return newUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas newUser', error);
         }
     }
 
@@ -87,7 +88,7 @@ class ContenedorUsersMongoAtlas {
             return modifyUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas ModifyOneUser', error);
         }
     }
 
@@ -99,7 +100,7 @@ class ContenedorUsersMongoAtlas {
             return userToken
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas ModifyUserToken', error);
         }
     }
 
@@ -110,7 +111,7 @@ class ContenedorUsersMongoAtlas {
             return deleteUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas DeleteOneUser', error);
         }
     }
 
@@ -121,7 +122,7 @@ class ContenedorUsersMongoAtlas {
             return userLogin
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas authTokenVerify', error);
         }
     }
 
@@ -132,7 +133,7 @@ class ContenedorUsersMongoAtlas {
             return LogUs
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Passport MongoAtlas LogoutUserRes', error);
         }
     }
 
@@ -141,7 +142,7 @@ class ContenedorUsersMongoAtlas {
         try {
             await this.userModel.findByIdAndUpdate(id, { foto: fotOavatar }, { new: true })
         } catch (error) {
-            console.log('error', error)
+            logger.error('Passport MongoAtlas addImage', error)
         }
     }
 }

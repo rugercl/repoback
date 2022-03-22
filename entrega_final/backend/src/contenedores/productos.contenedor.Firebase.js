@@ -1,6 +1,6 @@
 const admin = require('firebase-admin')
 const { v4: uuid4 } = require('uuid')
-
+const logger = require('../../src/utils/logger')
 const db = admin.firestore()
 
 class ContenedorCarritosFirebase {
@@ -29,7 +29,7 @@ class ContenedorCarritosFirebase {
             return res
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Productos Firebase findAll', error);
         }
     }
 
@@ -40,7 +40,7 @@ class ContenedorCarritosFirebase {
             return oneProd
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Productos Firebase findOneId', error);
         }
     }
  
@@ -57,13 +57,13 @@ class ContenedorCarritosFirebase {
                 stock,
                 codigo 
             }
-            console.log('newProd', newProd)
+            logger.error('newProd Firebase', newProd)
             const obj = await this.collections.add(newProd)
 
             return newProd
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Productos Firebase newProduct', error);
         }
     }
 
@@ -74,7 +74,7 @@ class ContenedorCarritosFirebase {
             return modifyProd
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Productos Firebase ModifyOneProduct', error);
         }
     }
 
@@ -85,7 +85,7 @@ class ContenedorCarritosFirebase {
             return delProd
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Productos Firebase DeleteOneProduct', error);
         }
     }
 

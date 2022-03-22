@@ -1,6 +1,7 @@
 const moment = require('moment')
 const toDay = moment().format('DD/MM/YYYY')
 const {productosDao} = require('../daos/index')
+const logger = require('../../src/utils/logger')
 
 exports.GetAllProducts = async (req, res) => {
  
@@ -10,7 +11,7 @@ exports.GetAllProducts = async (req, res) => {
         res.json(productos)
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Productos Controller GetAllProducts', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -24,7 +25,7 @@ exports.GetOneProduct = async (req, res) => {
         res.json(oneProduct)
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Productos Controller GetOneProduct', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -34,6 +35,7 @@ exports.CreateOneProduct = async (req, res) => {
     try {
 
         const {nombre, descripcion, foto, precio, stock, codigo} = req.body
+        logger.error(req.body)
 
         const newObjProd = {
             nombre,
@@ -49,7 +51,7 @@ exports.CreateOneProduct = async (req, res) => {
         res.json({ newProducts })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Productos Controller CreateOneProduct', error);
         res.status(500).json({ msg: 'Error', error })
 
     }
@@ -66,7 +68,7 @@ exports.ModifyOneProduct = async (req, res) => {
         res.json({ modProd })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Productos Controller ModifyOneProduct', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -80,7 +82,7 @@ exports.DeleteOneProduct = async (req, res) => {
         res.json({ msg: 'eliminado' })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Productos Controller DeleteOneProduct', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }

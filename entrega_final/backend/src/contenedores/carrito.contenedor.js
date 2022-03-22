@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 require('../config/db.mongo')
+const logger = require('../../src/utils/logger')
 
 class ContenedorCartMongoAtlas {
     constructor(collection, schema) {
@@ -12,7 +13,7 @@ class ContenedorCartMongoAtlas {
             const cartsAll = await this.cartModel.find()
             return cartsAll
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Mongo findAll', error);
         }
     }
 
@@ -23,7 +24,7 @@ class ContenedorCartMongoAtlas {
             return oneCart
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Mongo findOneId', error);
 
         }
     }
@@ -37,7 +38,7 @@ class ContenedorCartMongoAtlas {
 
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Mongo newCart', error);
 
         }
     }
@@ -49,7 +50,7 @@ class ContenedorCartMongoAtlas {
             return modifyCart
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Mongo ModifyOneCart', error);
         }
     }
 
@@ -60,7 +61,7 @@ class ContenedorCartMongoAtlas {
             return deleteCart
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Mongo DeleteOneCart', error);
 
         }
     }
@@ -72,7 +73,7 @@ class ContenedorCartMongoAtlas {
             return cartEnc 
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Mongo SaveCart', error);
         }
     }
 }

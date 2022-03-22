@@ -1,7 +1,8 @@
 const twlio = require('twilio')
 const { carritosDao, productosDao, usuariosDao } = require('../daos/index')
 const { sendNodeMailCart } = require('../middleware/nodeMailerCart')
-const logger = require('../utils/logger')
+const {logger} = require('../../src/utils/logger')
+
 
 const acountID = process.env.TWILIO_ACOUNT_ID
 const authToken = process.env.TWILIO_AUTH_TOKEN
@@ -15,7 +16,7 @@ exports.GetAllCarts = async (req, res) => {
         res.json({ cartsAll })
 
     } catch (error) {
-        logger.error('Carritos GetAllCarts ', error)
+        logger.error('Carritos Controller GetAllCarts ', error)
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -29,7 +30,7 @@ exports.GetOneCart = async (req, res) => {
         res.json({ oneCart })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos Controller GetOneCart ', error)
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -42,7 +43,7 @@ exports.newCart = async (req, res) => {
         res.json({ newCats })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos Controller newCart ', error)
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -58,7 +59,7 @@ exports.ModifyOneCart = async (req, res) => {
         res.json({ modCart })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos Controller ModifyOneCart ', error)
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -72,7 +73,7 @@ exports.DeleteOneCartAndProducts = async (req, res) => {
         res.json({ msg: 'eliminado' })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos Controller DeleteOneCartAndProducts', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -82,9 +83,9 @@ exports.addProductinTheCart = async (req, res) => {
     try {
 
         const idCart = req.params.id
-        console.log('idCart', idCart)
+        logger.error('idCart', idCart)
         const idProd = req.params.idProd
-        console.log('idProd', idProd)
+        logger.error('idProd', idProd)
 
         const cartEnc = await carritosDao.findOneId(idCart)
         const prodEnc = await productosDao.findOneId(idProd)
@@ -95,7 +96,7 @@ exports.addProductinTheCart = async (req, res) => {
 
         res.json({ CartG })
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos Controller addProductinTheCart', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -108,10 +109,10 @@ exports.DeleteOneProductCart = async (req, res) => {
         let idProd = req.params.idProd
 
         const cartSearch = await carritosDao.findOneId(idCart)
-        console.log('cartSearch', cartSearch);
+        logger.error('cartSearch DeleteOneProductCart', cartSearch);
 
         const prodSearch = await productosDao.findOneId(idProd)
-        console.log('prodSearch', prodSearch);
+        logger.error('prodSearch DeleteOneProductCart', prodSearch);
 
         cartSearch.producto.splice(prodSearch, 1)
         const CartG = carritosDao.SaveCart(cartSearch, idCart)
@@ -119,7 +120,7 @@ exports.DeleteOneProductCart = async (req, res) => {
         res.json(CartG)
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Carritos Controller DeleteOneProductCart', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -161,6 +162,6 @@ exports.payCart = async (req, res) => {
         res.json(msgClient)
 
     } catch (error) {
-        console.log('error', error)
+        logger.error('Carritos Controller payCart', error)
     }
 }

@@ -8,6 +8,7 @@ const sendNodeMailAdmin = require('../middleware/nodemailerAdmin')
 const cloudinary = require("../utils/cloudinary");
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const logger = require('../../src/utils/logger')
 
 passport.use('local-register', new LocalStrategy({
     usernameField: 'usuario',
@@ -16,7 +17,7 @@ passport.use('local-register', new LocalStrategy({
 }, async (req, usuario, contrasenia, done) => {
 
     try {
-        const userReg = await usuariosDao.findOneUser({ usuario });
+        // const userReg = await usuariosDao.findOneUser({ usuario });
 
         const { nombre, direccion, edad, telefono } = req.body
         const newUsers = await usuariosDao.newUser(req.body)
@@ -70,7 +71,7 @@ passport.use('local-register', new LocalStrategy({
 
 
     } catch (error) {
-        console.log('error1', error);
+        logger.error('Passport Local Register', error);
     }
 }))
 
@@ -92,10 +93,10 @@ passport.use('local-login', new LocalStrategy(async (usuario, contrasenia, done)
         const token = jwt.sign(jwt_payload, process.env.JWT_SECRET, { expiresIn: process.env.TIME_EXP })
         userLogin.token = [token]
         await usuariosDao.ModifyUserToken(userLogin)
-        console.log('usuarioLogueado', userLogin)
+        logger.error('usuarioLogueado', userLogin)
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Passport Local Login', error);
         res.status(500).json({ msg: 'Error', error })
     }
 
@@ -129,20 +130,20 @@ exports.ImageUpload = async (req, res) => {
         res.send(results.secure_url);
 
     } catch (error) {
-        console.log('error', error)
+        logger.error('Cloudinary ImageUpload', error)
     }
 }
 
 exports.LogoutUser = async (req, res) => {
     try {
 
-        console.log('resLocalsControllers', res.locals.user)
+        logger.error('resLocalsControllers', res.locals.user)
 
         await usuariosDao.LogoutUserRes(res.locals.user)
         res.json({ mensaje: 'Deslogueo ok' })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Passport LogoutUser', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -154,7 +155,7 @@ exports.GetAllUsers = async (req, res) => {
         res.json({ usuarios })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Usuarios Controller GetAllUsers', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -169,7 +170,7 @@ exports.GetOneUser = async (req, res) => {
         res.json({ oneUser })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Usuarios Controller GetOneUser', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -185,7 +186,7 @@ exports.ModifyOneUser = async (req, res) => {
         res.json({ modUser })
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Usuarios Controller ModifyOneUser', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }
@@ -199,7 +200,7 @@ exports.DeleteOneUSer = async (req, res) => {
         const userSearch = await usuariosDao.findOneId(id)
         let idCart = await userSearch.carritoID
         let cartSearch = await carritosDao.findOneId(idCart)
-        console.log('cartSearch', cartSearch);
+        logger.error('cartSearch', cartSearch);
 
         if (cartSearch.producto.length !== 0) {
 
@@ -219,7 +220,7 @@ exports.DeleteOneUSer = async (req, res) => {
         }
 
     } catch (error) {
-        console.log('error', error);
+        logger.error('Usuarios Controller DeleteOneUSer', error);
         res.status(500).json({ msg: 'Error', error })
     }
 }

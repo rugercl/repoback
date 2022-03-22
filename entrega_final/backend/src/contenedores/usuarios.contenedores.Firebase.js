@@ -1,6 +1,7 @@
 const admin = require('firebase-admin')
 const { v4: uuid4 } = require('uuid')
 const config = require('../config/ecommerce-d064c-firebase-adminsdk-v2owy-a323d5460a.json')
+const logger = require('../../src/utils/logger')
 
 
 // Create a reference to the cities collection
@@ -33,7 +34,7 @@ class ContenedorUsuariosFirebase {
             return res
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -44,7 +45,7 @@ class ContenedorUsuariosFirebase {
             return oneUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -55,7 +56,7 @@ class ContenedorUsuariosFirebase {
             const userRef = this.collections
             const oneUser = await userRef.where('usuario', '==', usuario).get();
             if (oneUser.empty) {
-                console.log('No matching documents.');
+                logger.error('No matching documents.');
                 return;
             }
 
@@ -69,7 +70,7 @@ class ContenedorUsuariosFirebase {
             return users
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -84,7 +85,7 @@ class ContenedorUsuariosFirebase {
             return newUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -97,7 +98,7 @@ class ContenedorUsuariosFirebase {
             return modifyUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -108,7 +109,7 @@ class ContenedorUsuariosFirebase {
             const oneUser = await userRef.where('usuario', '==', usuario).get();
 
             if (oneUser.empty) {
-                console.log('No matching documents.');
+                logger.error('No matching documents.');
                 return;
             }
 
@@ -123,7 +124,7 @@ class ContenedorUsuariosFirebase {
             let userUpdte = await this.collections.doc(idUser).set(user);
             return userUpdte
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -134,7 +135,7 @@ class ContenedorUsuariosFirebase {
             return deleteUser
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
@@ -147,7 +148,7 @@ class ContenedorUsuariosFirebase {
             const oneUser = await userRef.where('usuario', '==', usuario).get();
 
             if (oneUser.empty) {
-                console.log('No matching documents.');
+                logger.error('No matching documents.');
                 return;
             }
 
@@ -159,13 +160,13 @@ class ContenedorUsuariosFirebase {
             return users
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 
     async LogoutUserRes(resLocalUser) {
         try {
-            console.log('resLocalsL', resLocalUser)
+            logger.error('resLocalsL', resLocalUser)
 
             const { id, carritoID, nombre, edad, usuario, contrasenia, direccion, telefono, admin, token, foto } = resLocalUser
 
@@ -188,7 +189,7 @@ class ContenedorUsuariosFirebase {
             const oneUser = await userRef.where('usuario', '==', usuario).get();
 
             if (oneUser.empty) {
-                console.log('No matching documents.');
+                logger.error('No matching documents.');
                 return;
             }
 
@@ -203,12 +204,12 @@ class ContenedorUsuariosFirebase {
 
 
             let userupdateLogout = await this.collections.doc(idUser).set(LogoutUSer);
-            console.log('cinco')
+            logger.error('cinco')
 
             return userupdateLogout
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('error', error);
         }
     }
 

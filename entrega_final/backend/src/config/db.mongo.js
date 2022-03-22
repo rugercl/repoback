@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const logger = require('../../src/utils/logger')
 
 mongoose.connect(
     process.env.MONGO_DB, {
@@ -6,8 +7,8 @@ mongoose.connect(
     useUnifiedTopology: true
 }, (err) => {
     if (err) {
-       console.log('Server no Arranca ',err)
+       logger.error('Server no Arranca ',err)
     } else{
-        console.log('MongoAtlas Iniciado')
+        logger.error('MongoAtlas Iniciado')
     }
 })

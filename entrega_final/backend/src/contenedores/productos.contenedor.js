@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 require('../config/db.mongo')
-
+const logger = require('../../src/utils/logger')
 class ContenedorMongoAtlas {
     constructor(collection, schema) {
         this.prodModel = mongoose.model(collection, schema)
@@ -13,7 +13,7 @@ class ContenedorMongoAtlas {
             return productsAll
             
         } catch (error) {
-            console.log('error', error)
+            logger.error('Productos Mongo findAll', error)
         }
     }
 
@@ -24,7 +24,7 @@ class ContenedorMongoAtlas {
             return oneProduct
 
         } catch (error) {
-            console.log('error', error)
+            logger.error('Productos Mongo findOneId', error)
 
         }
     }
@@ -38,7 +38,7 @@ class ContenedorMongoAtlas {
             return newProduct
 
         } catch (error) {
-            console.log('error', error)
+            logger.error('Productos Mongo newProduct', error)
 
         }
     }
@@ -50,7 +50,7 @@ class ContenedorMongoAtlas {
             return modifyProd
 
         } catch (error) {
-            console.log('error', error)
+            logger.error('Productos Mongo ModifyOneProduct', error)
 
         }
     }
@@ -62,7 +62,7 @@ class ContenedorMongoAtlas {
             return deleteProd
 
         } catch (error) {
-            console.log('error', error)
+            logger.error('Productos Mongo DeleteOneProduct', error)
 
         }
     }

@@ -1,5 +1,6 @@
 const admin = require('firebase-admin')
 const { v4: uuid4 } = require('uuid')
+const { logger } = require('../../src/utils/logger')
 
 const db = admin.firestore()
 
@@ -25,7 +26,7 @@ class ContenedorCarritosFirebase {
 
             return res
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Firebase findAll', error);
         }
     }
 
@@ -36,7 +37,7 @@ class ContenedorCarritosFirebase {
             return oneCart
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Firebase findOneId', error);
         }
     }
 
@@ -51,7 +52,7 @@ class ContenedorCarritosFirebase {
             return newCarts
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Firebase newCart', error);
         }
     }
 
@@ -62,7 +63,7 @@ class ContenedorCarritosFirebase {
             return modifyCart
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Firebase ModifyOneCart', error);
         }
     }
 
@@ -73,20 +74,20 @@ class ContenedorCarritosFirebase {
             return delCart
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Firebase DeleteOneCart', error);
         }
     }
 
     async SaveCart(cartEnc, idCart, idProd) {
         try {
-           console.log('cartEnc', cartEnc)
-           console.log('idCart', idCart)
-           console.log('idProd', idProd)
+           logger.error('cartEnc', cartEnc)
+           logger.error('idCart', idCart)
+           logger.error('idProd', idProd)
            const saveCart = await this.collections.doc(idCart).set(cartEnc);
             return saveCart 
 
         } catch (error) {
-            console.log('error', error);
+            logger.error('Carrito Firebase SaveCart', error);
         }
     }
 

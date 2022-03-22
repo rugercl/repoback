@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 const { usuariosDao } = require('../daos/index')
+const logger = require('../../src/utils/logger')
 
 module.exports = (role) => async (req, res, next) => {
 
     try {
 
         const token = req.header('authorization').replace('Bearer ', '');
-        console.log('token', token)
+        logger.error('token', token)
         const verificar = jwt.verify(token, process.env.JWT_SECRET);
         const userLogin = await usuariosDao.authTokenVerify({ verificar, token });
         if (!userLogin) {
@@ -20,7 +21,7 @@ module.exports = (role) => async (req, res, next) => {
     }
 
     catch (error) {
-        console.log('error', error);
+        logger.error('error', error);
         return res.status(401).json({ mensaje: 'Logout: Acceso Restringido', error: error.message })
     }
 }
