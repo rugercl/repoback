@@ -16,10 +16,10 @@ passport.use('local-register', new LocalStrategy({
     passReqToCallback: true
 }, async (req, usuario, contrasenia, done) => {
 
-    try {
-        // const userReg = await usuariosDao.findOneUser({ usuario });
-
-        const { nombre, direccion, edad, telefono } = req.body
+    const user = await usuariosDao.findOneUser({ usuario })
+    if (user) {
+        return done({ msg: 'usuario no disponible' }, false)
+    }
         const newUsers = await usuariosDao.newUser(req.body)
 
         const newCart = {
@@ -32,10 +32,10 @@ passport.use('local-register', new LocalStrategy({
 
         const newUser = {
             carritoID: newCarts.id,
-            nombre,
-            direccion,
-            edad,
-            telefono,
+            nombre: req.body.nombre,
+            direccion: req.body.direccion,
+            edad: req.body.edad,
+            telefono: req.body.telefono,
             usuario: usuario.toLowerCase(),
             admin: false,
             token: []
@@ -64,23 +64,40 @@ passport.use('local-register', new LocalStrategy({
         const contentEmail = {
             email: usuario,
             subject: 'Registro exitoso ',
-            msg: '¡Hola ' + nameUser(nombre) + ' Bienvenido!',
+            msg: '¡Hola ' + nameUser(req.body.nombre) + ' Bienvenido!',
         }
 
         await sendNodeMail(contentEmail.email, contentEmail.subject, contentEmail.msg)
+        done(null, { id: newUsers.id, userData: newUser })
 
-
-    } catch (error) {
-        logger.error('Passport Local Register', error);
-    }
 }))
 
+//Serializar
+passport.serializeUser((user, done) => {
+    done(null, user.id)
+})
+
+//Deserealizar
+passport.deserializeUser((id, done) => {
+    let user = userModel.findOne({ id })
+    done(null, user)
+})
+
 //Login PassPort
-passport.use('local-login', new LocalStrategy(async (usuario, contrasenia, done) => {
+passport.use('local-login', new LocalStrategy({
+    usernameField: 'usuario',
+    passwordField: 'contrasenia'
+}, async (usuario, contrasenia, done) => {
 
-    try {
+    const userLogin = await usuariosDao.findOneUser({ usuario });
+    if (!userLogin) {
+        return done({ msg: 'Usuario y/o Contraseña Incorrectos' }, false)
+    }
 
-        const userLogin = await usuariosDao.findOneUser({ usuario });
+    const passCheck = await bcryptjs.compare(contrasenia, userLogin.contrasenia);
+    if (!passCheck) {
+        return done({ msg: 'Usuario y/o Contraseña Incorrectos' }, false)
+    }
 
         const jwt_payload = {
             user: {
@@ -93,12 +110,8 @@ passport.use('local-login', new LocalStrategy(async (usuario, contrasenia, done)
         const token = jwt.sign(jwt_payload, process.env.JWT_SECRET, { expiresIn: process.env.TIME_EXP })
         userLogin.token = [token]
         await usuariosDao.ModifyUserToken(userLogin)
+        return done(null, userLogin)
         logger.error('usuarioLogueado', userLogin)
-
-    } catch (error) {
-        logger.error('Passport Local Login', error);
-        res.status(500).json({ msg: 'Error', error })
-    }
 
 }))
 
@@ -131,6 +144,8 @@ exports.ImageUpload = async (req, res) => {
 
     } catch (error) {
         logger.error('Cloudinary ImageUpload', error)
+        await usuariosDao.DeleteOneUser(id)
+        res.status(500).json(error)
     }
 }
 
@@ -138,7 +153,6 @@ exports.LogoutUser = async (req, res) => {
     try {
 
         logger.error('resLocalsControllers', res.locals.user)
-
         await usuariosDao.LogoutUserRes(res.locals.user)
         res.json({ mensaje: 'Deslogueo ok' })
 

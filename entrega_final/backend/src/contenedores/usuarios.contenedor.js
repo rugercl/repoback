@@ -69,11 +69,13 @@ class ContenedorUsersMongoAtlas {
     }
 
     async newUser(body) {
-        console.log(body)
+        
         try {
+            console.log(body)
 
             const newUser = new this.userModel(body);
             await newUser.save()
+            console.log(newUser)
             return newUser
 
         } catch (error) {
